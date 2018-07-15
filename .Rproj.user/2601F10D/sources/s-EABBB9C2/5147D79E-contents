@@ -179,15 +179,16 @@ res <- svm_opt(
   test_data = iris_test,
   test_label = Species,
   # about hyper parameters (optional, default is following)
+  svm_kernel = "radial", # RBF
   gamma_range = c(10 ^ (-5), 10 ^ 5),
-  c_range = c(10 ^ (-2), 10 ^ 2),
+  cost_range = c(10 ^ (-2), 10 ^ 2),
   # about bayesian optimization (optional, default is following)
   init_points = 20,
   n_iter = 1,
   acq = "ei",
   kappa = 2.576,
   eps = 0.0,
-  kernel = list(type = "exponential", power = 2)
+  optkernel = list(type = "exponential", power = 2)
   )
 ```
 

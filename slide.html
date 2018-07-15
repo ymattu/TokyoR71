@@ -632,15 +632,16 @@ res0 &lt;-<span class="st"> </span><span class="kw">xgb_cv_opt</span>(<span clas
   <span class="dt">test_data =</span> iris_test,
   <span class="dt">test_label =</span> Species,
   <span class="co"># about hyper parameters (optional, default is following)</span>
+  <span class="dt">svm_kernel =</span> <span class="st">&quot;radial&quot;</span>, <span class="co"># RBF</span>
   <span class="dt">gamma_range =</span> <span class="kw">c</span>(<span class="dv">10</span> <span class="op">^</span><span class="st"> </span>(<span class="op">-</span><span class="dv">5</span>), <span class="dv">10</span> <span class="op">^</span><span class="st"> </span><span class="dv">5</span>),
-  <span class="dt">c_range =</span> <span class="kw">c</span>(<span class="dv">10</span> <span class="op">^</span><span class="st"> </span>(<span class="op">-</span><span class="dv">2</span>), <span class="dv">10</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>),
+  <span class="dt">cost_range =</span> <span class="kw">c</span>(<span class="dv">10</span> <span class="op">^</span><span class="st"> </span>(<span class="op">-</span><span class="dv">2</span>), <span class="dv">10</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>),
   <span class="co"># about bayesian optimization (optional, default is following)</span>
   <span class="dt">init_points =</span> <span class="dv">20</span>,
   <span class="dt">n_iter =</span> <span class="dv">1</span>,
   <span class="dt">acq =</span> <span class="st">&quot;ei&quot;</span>,
   <span class="dt">kappa =</span> <span class="fl">2.576</span>,
   <span class="dt">eps =</span> <span class="fl">0.0</span>,
-  <span class="dt">kernel =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&quot;exponential&quot;</span>, <span class="dt">power =</span> <span class="dv">2</span>)
+  <span class="dt">optkernel =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&quot;exponential&quot;</span>, <span class="dt">power =</span> <span class="dv">2</span>)
   )</code></pre></div>
 </section></section>
 <section><section id="future-works" class="titleslide slide level1"><h1>Future Works</h1></section><section id="this-package-is-still-a-development-version" class="slide level2">
