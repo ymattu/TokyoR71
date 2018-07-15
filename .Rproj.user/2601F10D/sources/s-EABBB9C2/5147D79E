@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1531633639317.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5147D79E",
+    "lastKnownWriteTime" : 1531637667,
+    "last_content_update" : 1531637667157,
+    "path" : "~/Desktop/TokyoR71/slide.Rmd",
+    "project_path" : "slide.Rmd",
+    "properties" : {
+        "cursorPosition" : "8,32",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

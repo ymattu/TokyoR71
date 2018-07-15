@@ -1,0 +1,201 @@
+---
+title: "Easy Writing for Bayesian Optimization in Machine Learning"
+subtitle: "MlBayesOpt package"
+author: "@y__mattu"
+date: "Tokyo.R #71 <br> July 15, 2018"
+output:
+  revealjs::revealjs_presentation:
+    include:
+      before_body: "slide-footer.html"
+    transition: convex
+    css: for_revealjs.css
+    theme: sky
+    highlight: pygments
+    center: true
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      slideNumber: true
+      chalkboard:
+        theme: whiteboard
+---
+
+```{r eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE, comment=""}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      comment = "",
+                      fig.height = 7,
+                      fig.width = 7,
+                      out.height = 400,
+                      out.width = 400)
+```
+
+# Introduction
+
+## Profile
+
+<div class="column1">
+- Yuya MATSUMURA <br> (松村優哉)
+- <u>Twitter</u>: **y\_\_mattu**
+- <u>GitHub</u>: **ymattu**
+- Graduate student of Keio University
+- <u>Studying</u>: Econometrics, Bayesian Statistics, Causal Inference
+- <u>Languages</u>: R, Python, SAS
+</div>
+
+<div class="column2">
+![icon](./slide_img/twitter_icon.jpg)
+
+# useR!2018
+## Fantastic Conference {#tripast}
+![](slide_img/IMG00346.jpg)
+
+## hexwall
+![](slide_img/IMG00366.jpg)
+
+## Poster Presentation
+![](slide_img/IMG00369.jpg)
+
+# Today's Talk: {#todyastalk}
+## In short...
+- Very short summary of poster presentation at **useR!2018**
+- cf. Global TokyoR #2
+    - Today's content is updated.
+
+# Summary of this package
+## About this package
+- MlBayesOpt(https://github.com/ymattu/MlBayesOpt)
+- <font color="HotPink">This package make it easier to write a script to execute parameter tuning using  bayesian optimization.</font>
+- **SVM**(Linear, Polynomial, RBF, Sigmoid Kernels)、**Random Forest**、**XGboost**
+- Based on following packages:
+    - SVM(**e1071**)
+    - RF(**ranger**)
+    - XGboost(**xgboost**)
+    - Bayesian Optimization(**rBayesianOptimization**)
+- Wecan use both of "Hold-Out" and "Cross Validation"
+
+# **MlBayesOpt**
+
+## Installation and Loading
+### Installation
+```{r eval=FALSE}
+install.packages("MlBayesOpt")
+devtools::install_github("ymattu/MlBayesOpt")
+```
+
+### Loading
+```{r eval=FALSE}
+library(MlBayesOpt)
+```
+
+# Usage
+# Hold-Out
+## SVM
+```{r eval=FALSE}
+set.seed(123)
+
+res <- svm_opt(
+  train_data = iris_train,
+  train_label = iris_train$Species,
+  test_data = iris_test,
+  test_label = iris_test$Species,
+  acq = "ucb"
+  )
+```
+
+## Output of SVM (Excerpt)
+```{r eval=FALSE}
+elapsed = 0.00	Round = 1	gamma_opt = 6.e+04	cost_opt = 42.9050	Value = 0.3333
+elapsed = 0.01	Round = 2	gamma_opt = 6.e+04	cost_opt = 12.0327	Value = 0.3333
+elapsed = 0.00	Round = 3	gamma_opt = 7.e+04	cost_opt = 92.1573	Value = 0.3333
+elapsed = 0.01	Round = 4	gamma_opt = 9.e+04	cost_opt = 18.3716	Value = 0.3333
+elapsed = 0.01	Round = 5	gamma_opt = 8.e+04	cost_opt = 56.2588	Value = 0.3333
+# [...]
+elapsed = 0.00	Round = 19	gamma_opt = 2453.1625	cost_opt = 84.8863	Value = 0.3733
+elapsed = 0.00	Round = 20	gamma_opt = 1.e+05	cost_opt = 62.2435	Value = 0.3333
+elapsed = 0.01	Round = 21	gamma_opt = 1.e+04	cost_opt = 23.6688	Value = 0.5867
+
+ Best Parameters Found:
+Round = 15	gamma_opt = 1.e+04	cost_opt = 79.5983	Value = 0.6133
+```
+
+# Cross Validation
+## SVM
+```{r eval=FALSE}
+set.seed(71)
+res0 <- svm_cv_opt(data = iris,
+                   label = Species,
+                   n_folds = 3,
+                   init_points = 10,
+                   n_iter = 1)
+```
+
+
+## Output of SVM
+```{r eval=FALSE}
+elapsed = 0.02	Round = 1	gamma_opt = 3.3299	cost_opt = 11.7670	Value = 0.9333 
+elapsed = 0.01	Round = 2	gamma_opt = 5.5515	cost_opt = 76.1740	Value = 0.9067 
+elapsed = 0.01	Round = 3	gamma_opt = 3.2744	cost_opt = 14.1882	Value = 0.9400 
+elapsed = 0.01	Round = 4	gamma_opt = 2.1175	cost_opt = 76.6932	Value = 0.9200 
+elapsed = 0.01	Round = 5	gamma_opt = 3.1619	cost_opt = 84.2154	Value = 0.9600 
+elapsed = 0.01	Round = 6	gamma_opt = 9.4727	cost_opt = 77.6772	Value = 0.8933 
+elapsed = 0.01	Round = 7	gamma_opt = 6.6175	cost_opt = 13.3914	Value = 0.9267 
+elapsed = 0.02	Round = 8	gamma_opt = 8.8943	cost_opt = 80.5955	Value = 0.8733 
+elapsed = 0.01	Round = 9	gamma_opt = 3.3808	cost_opt = 89.6793	Value = 0.9333 
+elapsed = 0.01	Round = 10	gamma_opt = 4.3481	cost_opt = 92.6987	Value = 0.9000 
+elapsed = 0.01	Round = 11	gamma_opt = 2.9508	cost_opt = 84.8600	Value = 0.9467 
+ 
+Best Parameters Found: 
+Round = 5	gamma_opt = 3.1619	cost_opt = 84.2154	Value = 0.9600 
+```
+
+## XGboost
+```{r eval=FALSE}
+set.seed(71)
+
+res0 <- xgb_cv_opt(data = iris,
+                   label = Species,
+                   objectfun = "multi:softmax",
+                   evalmetric = "mlogloss",
+                   n_folds = 3,
+                   classes = 3,
+                   init_points = 2,
+                   n_iter = 1)
+)
+```
+
+## About arguments
+ex. "Hold Out" using SVM
+```{r eval=FALSE}
+res <- svm_opt(
+  # about dataset (at least required)
+  train_data = iris_train,
+  train_label = iris_train$Species,
+  test_data = iris_test,
+  test_label = iris_test$Species,
+  # about hyper parameters (optional, default is following)
+  gamma_range = c(10 ^ (-5), 10 ^ 5),
+  c_range = c(10 ^ (-2), 10 ^ 2),
+  # about bayesian optimization (optional, default is following)
+  init_points = 20,
+  n_iter = 1,
+  acq = "ei",
+  kappa = 2.576,
+  eps = 0.0,
+  kernel = list(type = "exponential", power = 2)
+  )
+```
+
+# Future Works
+## This package is still a development version...
+- Fix some bugs
+- Make functuions about Deep Learning...? (**mxnet package**...?)
+
+## Enjoy R programming !
+This slide is made from **revealjs** package.
+
+This slide and Rmd file are published on Git Hub(https://github.com/ymattu/TokyoR/71).
+
+
