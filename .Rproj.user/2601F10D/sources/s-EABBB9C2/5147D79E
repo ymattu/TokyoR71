@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "4128673414",
     "id" : "5147D79E",
-    "lastKnownWriteTime" : 1531637667,
-    "last_content_update" : 1531637667157,
+    "lastKnownWriteTime" : 1531640256,
+    "last_content_update" : 1531640256076,
     "path" : "~/Desktop/TokyoR71/slide.Rmd",
     "project_path" : "slide.Rmd",
     "properties" : {
-        "cursorPosition" : "8,32",
-        "scrollLine" : "0"
+        "cursorPosition" : "201,81",
+        "scrollLine" : "192"
     },
     "relative_order" : 1,
     "source_on_save" : false,
